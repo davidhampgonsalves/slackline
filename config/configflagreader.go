@@ -2,14 +2,12 @@ package config
 
 import (
   "strings"
-  "github.com/davidhampgonsalves/slackline/crypto"
   "github.com/alecthomas/kingpin"
 )
 
-func Load() Config { 
-}
+type FlagConfig struct {}
 
-func fromFlags() Config {
+func (*FlagConfig) read() *Configuration {
   save := kingpin.Flag("save", "Persist current settings.").Short('s').Bool()
   init := kingpin.Flag("init", "Prompt user for settings.").Short('i').Bool()
   channelsRaw := kingpin.Flag("channels", "Channel(s) to post to(comma seperated).").Short('c').String()
@@ -21,15 +19,5 @@ func fromFlags() Config {
 
   channels := strings.Split(*channelsRaw, ",")
 
-  return Config{channels: channels, save: *save, init: *init, token: *token}
-}
-
-func fromFile() Config {
-  s := crypto.Decrypt("")
-}
-
-type Config struct {
-  save, init bool
-  token string
-  channels []string
+  return &Configuration{channels: channels, save: *save, init: *init, token: *token}
 }

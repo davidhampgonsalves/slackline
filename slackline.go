@@ -26,6 +26,6 @@ TODO:
 */
 
 func main() {
-  config := load.Config()
+  config := config.Load()
   fmt.Printf("hello, world %+v", config)
 }
