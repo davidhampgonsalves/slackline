@@ -7,7 +7,11 @@ import (
 )
 
 func Decrypt(str string) string {
-  return ""
+  return str
+}
+
+func Encrypt(str string) string {
+  return str
 }
 
 func getKey() string {
