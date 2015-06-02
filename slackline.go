@@ -1,10 +1,9 @@
 package main
 
 import (
-  "fmt"
-  "github.com/davidhampgonsalves/slackline/conf"
+	"fmt"
+	"github.com/davidhampgonsalves/slackline/conf"
 )
-
 
 /*
 
@@ -26,10 +25,10 @@ TODO:
 */
 
 func main() {
-  conf, err := conf.Load()
+	conf, err := conf.Load()
 
-  if err != nil {
-    fmt.Print(err)
-  }
-  fmt.Printf("hello, world %+v", conf)
+	if err != nil {
+		fmt.Print(err)
+	}
+	fmt.Printf("hello, world %+v", conf)
 }
