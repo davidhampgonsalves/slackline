@@ -1,10 +1,9 @@
 package conf
 
 type Conf struct {
-	Save, Init    bool
-	SlackToken    string
-	SlackChannels []string
-	Priority      int
+	Save, Init          bool "-"
+	SlackToken, Message string
+	SlackChannels       []string
 }
 
 // Validate conf

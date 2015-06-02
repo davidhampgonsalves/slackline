@@ -16,13 +16,14 @@ func ReadFlagConfig() (*Conf, error) {
 	init := kingpin.Flag("init", "Prompt user for settings.").Short('i').Bool()
 	token := kingpin.Flag("token", "Slack auth token.").Short('t').String()
 	channelsStr := kingpin.Flag("channels", "Channel(s) to post to(comma seperated).").Short('c').String()
+	msg := kingpin.Arg("message", "message to post to slack.").Required().String()
 
 	kingpin.Version("0.0.1")
 	kingpin.Parse()
 
 	channels := strings.Split(*channelsStr, ",")
 
-	return &Conf{SlackChannels: channels, Save: *save, Init: *init, SlackToken: *token}, nil
+	return &Conf{SlackChannels: channels, Save: *save, Init: *init, SlackToken: *token, Message: *msg}, nil
 }
 
 func ReadYamlConf(path string) (*Conf, error) {

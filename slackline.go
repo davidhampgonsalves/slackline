@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/davidhampgonsalves/slackline/conf"
+	"github.com/davidhampgonsalves/slackline/slack"
 )
 
 /*
@@ -25,10 +26,18 @@ TODO:
 */
 
 func main() {
-	conf, err := conf.Load()
+	config, err := conf.Load()
 
 	if err != nil {
 		fmt.Print(err)
 	}
-	fmt.Printf("hello, world %+v", conf)
+
+  err = slack.PostMessage(config)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+  if config.Save {
+    conf.Save(config)
+  }
 }

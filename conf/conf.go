@@ -13,3 +13,8 @@ func Load() (*Conf, error) {
 
 	return yamlConf.Merge(flagConf), nil
 }
+
+func Save(c *Conf) error {
+	err := WriteYamlConf("~/.slackline.yaml", c)
+  return err
+}
