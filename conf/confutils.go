@@ -21,8 +21,10 @@ func ReadFlagConfig() (*Conf, error) {
 	kingpin.Version("0.0.1")
 	kingpin.Parse()
 
-	channels := strings.Split(*channelsStr, ",")
-
+	var channels []string
+	if *channelsStr != "" {
+		channels = strings.Split(*channelsStr, ",")
+	}
 	return &Conf{SlackChannels: channels, Save: *save, Init: *init, SlackToken: *token, Message: *msg}, nil
 }
 
@@ -66,6 +68,7 @@ func WriteYamlConf(path string, c *Conf) error {
 		return errors.New("failed to marshal config to YAML: " + err.Error())
 	}
 
+	path, _ = homedir.Expand(path)
 	err = ioutil.WriteFile(path, yamlData, 0644)
 	if err != nil {
 		return errors.New("failed to write YAML config: " + err.Error())

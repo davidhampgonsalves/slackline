@@ -6,6 +6,7 @@ func Load() (*Conf, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	flagConf, err := ReadFlagConfig()
 	if err != nil {
 		return nil, err
@@ -16,5 +17,5 @@ func Load() (*Conf, error) {
 
 func Save(c *Conf) error {
 	err := WriteYamlConf("~/.slackline.yaml", c)
-  return err
+	return err
 }

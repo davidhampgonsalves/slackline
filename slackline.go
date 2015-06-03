@@ -13,7 +13,7 @@ flags
  -t = set token
  --save = persist flags to config
  -i = init, ask for channels and token
-handle piping output
+handle piping input?
 
 TODO:
   validate flags / get message
@@ -27,17 +27,26 @@ TODO:
 
 func main() {
 	config, err := conf.Load()
+	fmt.Println(*config)
 
 	if err != nil {
 		fmt.Print(err)
+		return
 	}
 
-  err = slack.PostMessage(config)
+	err = slack.JoinChannel(config)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
-  if config.Save {
-    conf.Save(config)
-  }
+	err = slack.PostMessage(config)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	if config.Save {
+		conf.Save(config)
+	}
 }

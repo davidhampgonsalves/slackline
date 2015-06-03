@@ -1,9 +1,10 @@
 package conf
 
 type Conf struct {
-	Save, Init          bool "-"
-	SlackToken, Message string
-	SlackChannels       []string
+	Save, Init    bool "-"
+	SlackToken    string
+	Message       string "-"
+	SlackChannels []string
 }
 
 // Validate conf
@@ -22,10 +23,15 @@ func (conf Conf) Merge(c2 *Conf) *Conf {
 	conf.Save = conf2.Save
 	conf.Init = conf2.Init
 
+	if conf2.Message != "" {
+		conf.Message = conf2.Message
+	}
+
 	if conf2.SlackToken != "" {
 		conf.SlackToken = conf2.SlackToken
 	}
-	if conf2.SlackChannels != nil {
+
+	if len(conf2.SlackChannels) > 0 {
 		conf.SlackChannels = conf2.SlackChannels
 	}
 	return &conf
