@@ -11,21 +11,26 @@ import (
 	"strings"
 )
 
-func ReadFlagConfig() (*Conf, error) {
-	save := kingpin.Flag("save", "Persist current settings.").Short('s').Bool()
-	init := kingpin.Flag("init", "Prompt user for settings.").Short('i').Bool()
-	token := kingpin.Flag("token", "Slack auth token.").Short('t').String()
-	channelsStr := kingpin.Flag("channels", "Channel(s) to post to(comma seperated).").Short('c').String()
-	msg := kingpin.Arg("message", "message to post to slack.").Required().String()
+func ReadFlagConfig() (conf *Conf, err error) {
+	app := kingpin.New("slackline", "Fire quick status updates to slack.")
+	save := app.Flag("save", "Persist current settings.").Short('s').Bool()
+	init := app.Flag("init", "Prompt user for settings.").Short('i').Bool()
+	token := app.Flag("token", "Slack auth token.").Short('t').String()
+	channelsStr := app.Flag("channels", "Channel(s) to post to(comma seperated).").Short('c').String()
+	msgParts := app.Arg("message", "message to post to slack.").Required().Strings()
 
-	kingpin.Version("0.0.1")
-	kingpin.Parse()
+	app.Version("0.0.1")
+	app.Terminate(func(status int) {
+		os.Exit(0)
+	})
+	kingpin.MustParse(app.Parse(os.Args[1:]))
 
 	var channels []string
 	if *channelsStr != "" {
 		channels = strings.Split(*channelsStr, ",")
 	}
-	return &Conf{SlackChannels: channels, Save: *save, Init: *init, SlackToken: *token, Message: *msg}, nil
+	msg := strings.Join(*msgParts, " ")
+	return &Conf{SlackChannels: channels, Save: *save, Init: *init, SlackToken: *token, Message: msg}, nil
 }
 
 func ReadYamlConf(path string) (*Conf, error) {
@@ -38,7 +43,7 @@ func ReadYamlConf(path string) (*Conf, error) {
 
 	yamlData, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, errors.New("YAML onfig file error " + err.Error())
+		return nil, errors.New("YAML config file error " + err.Error())
 	}
 
 	conf := Conf{}

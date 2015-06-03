@@ -11,7 +11,7 @@ import (
 
 func PostMessage(config *conf.Conf) error {
 	c := *config
-	msg := url.QueryEscape(c.Message)
+	msg := formatMessage(config)
 	url := fmt.Sprintf("https://slack.com/api/chat.postMessage?token=%v&channel=%v&text=%v&as_user=true&link_names=1&unfurl_links=false", c.SlackToken, url.QueryEscape(c.SlackChannels[0]), msg)
 	return makeSlackRequest("post message", url)
 }
@@ -20,6 +20,11 @@ func JoinChannel(config *conf.Conf) error {
 	c := *config
 	url := fmt.Sprintf("https://slack.com/api/channels.join?token=%v&name=%v", c.SlackToken, url.QueryEscape(c.SlackChannels[0]))
 	return makeSlackRequest("join channel", url)
+}
+
+func formatMessage(config *conf.Conf) string {
+	msg := config.Message
+	return url.QueryEscape(msg)
 }
 
 type Response struct {

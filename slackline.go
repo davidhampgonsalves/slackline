@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/davidhampgonsalves/slackline/conf"
 	"github.com/davidhampgonsalves/slackline/slack"
+	"os"
 )
 
 /*
@@ -16,13 +17,10 @@ flags
 handle piping input?
 
 TODO:
-  validate flags / get message
-  get cred token, user name from .slk-line or -t
-    if no cred, display link to get token from slack
-      - allow user to enter token which will be saved to .slk-line encrypted with mac, cpu, etc as key
-  make request
-  display errors
-
+  if no cred or channels, display link to get token from slack
+    - allow user to enter token which will be saved to .slk-line encrypted with mac, cpu, etc as key
+  init walkthrough
+  message format
 */
 
 func main() {
@@ -31,19 +29,19 @@ func main() {
 
 	if err != nil {
 		fmt.Print(err)
-		return
+		os.Exit(0)
 	}
 
 	err = slack.JoinChannel(config)
 	if err != nil {
 		fmt.Println(err)
-		return
+		os.Exit(0)
 	}
 
 	err = slack.PostMessage(config)
 	if err != nil {
 		fmt.Println(err)
-		return
+		os.Exit(0)
 	}
 
 	if config.Save {
