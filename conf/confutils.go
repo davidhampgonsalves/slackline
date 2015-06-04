@@ -13,13 +13,13 @@ import (
 
 func ReadFlagConfig() (conf *Conf, err error) {
 	app := kingpin.New("slackline", "Fire quick status updates to slack.")
-	save := app.Flag("save", "Persist current settings.").Short('s').Bool()
-	init := app.Flag("init", "Prompt user for settings.").Short('i').Bool()
+	save := app.Flag("save", "Persist current settings.").Bool()
+	init := app.Flag("init", "Prompt user for settings.").Bool()
 	token := app.Flag("token", "Slack auth token.").Short('t').String()
-	channelsStr := app.Flag("channels", "Channel(s) to post to(comma seperated).").Short('c').String()
-	msgParts := app.Arg("message", "message to post to slack.").Required().Strings()
+	channelsStr := app.Flag("channels", "Channel to post to.").Short('c').String()
+	msgParts := app.Arg("message", "message to post to slack.").Strings()
 
-	app.Version("0.0.1")
+	app.Version("slackline ver. ☃")
 	app.Terminate(func(status int) {
 		os.Exit(0)
 	})

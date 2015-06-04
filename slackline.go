@@ -25,26 +25,25 @@ TODO:
 
 func main() {
 	config, err := conf.Load()
-	fmt.Println(*config)
-
 	if err != nil {
 		fmt.Print(err)
 		os.Exit(0)
 	}
 
-	err = slack.JoinChannel(config)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(0)
-	}
+	if config.Message != "" {
+		err = slack.JoinChannel(config)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(0)
+		}
 
-	err = slack.PostMessage(config)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(0)
-	}
-
-	if config.Save {
+		err = slack.PostMessage(config)
+		if err != nil {
+			fmt.Println(err)
+		}
+	} else if config.Save {
 		conf.Save(config)
+	} else {
+		fmt.Print("you must provide a message to post.")
 	}
 }
