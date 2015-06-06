@@ -2,13 +2,13 @@ package conf
 
 import (
 	"errors"
+	"io/ioutil"
+	"os"
+	"strings"
 	"github.com/alecthomas/kingpin"
 	"github.com/davidhampgonsalves/slackline/crypto"
 	"github.com/mitchellh/go-homedir"
 	"gopkg.in/yaml.v2"
-	"io/ioutil"
-	"os"
-	"strings"
 )
 
 func ReadFlagConfig() (conf *Conf, err error) {
