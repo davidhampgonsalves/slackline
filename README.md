@@ -1,7 +1,9 @@
 # Slackline
 > Slackline lets you post updates/messages to slack with minimal disruption from the cmd line.
 
-<img src="https://github.com/davidhampgonsalves/slackline/blob/master/slackline.gif" width=600px> 
+<p style="text-align:center">
+  <img src="https://github.com/davidhampgonsalves/slackline/blob/master/slackline.gif" width=1200px> 
+</p>
 
 ## Usage
 **Post a message.**
