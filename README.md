@@ -1,14 +1,23 @@
 # Slackline
 > Slackline lets you post updates/messages to slack with minimal disruption from the cmd line.
 
-[[https://github.com/davidhampgonsalves/slackline/blob/master/slackline.gif|width:600px]]
+<img src="https://github.com/davidhampgonsalves/slackline/blob/master/slackline.gif" width=600px> 
 
 ## Usage
-**Post a message.** `slackline Hello world from slackline!`
+**Post a message.**
+``` sh
+slackline Hello world from slackline!
+```
 
-**Setup slack token and channel via prompts. Settings saved to ~/.slackline.yml** `slackline --init`
+**Setup slack token and channel via prompts. Settings saved to ~/.slackline.yml**
+``` sh
+slackline --init
+```
 
-**Set your slack token / channel.** `slackline -t <slack-token> -c "#channel" message to post`
+**Set your slack token / channel.**
+``` sh
+slackline -t <slack-token> -c "#channel" message to post
+```
 
 **Flags can be saved to ~/.slackline.yml. Your token will be encrypted.**
 ``` sh
