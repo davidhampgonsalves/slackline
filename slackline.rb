@@ -1,7 +1,8 @@
 class Slackline < Formula
   desc "Post updates/messages to slack with minimal disruption from the cmd line."
   homepage "https://github.com/davidhampgonsalves/slackline"
-  url "https://github.com/davidhampgonsalves/slackline"
+  url "https://github.com/davidhampgonsalves/slackline/archive/1.0.tar.gz"
+https://github.com/wincent/clipper/archive/0.2.tar.gz
   version "1.0"
 
   depends_on "go" => :build
@@ -9,13 +10,9 @@ class Slackline < Formula
 
   def install
     ENV["GOPATH"] = buildpath
-    system "go", "get", "github.com/davidhampgonsalves/slackline"
+    system "gpm", "install"
+    system "go", "build", "slackline.go"
 
-    # Install Go dependencies
-    # system "gpm", "install"
-
-    # Build and install termshare
-    # system "go", "build", "-o", "slackline"
     bin.install "slackline"
   end
 
