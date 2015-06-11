@@ -3,7 +3,7 @@ class Slackline < Formula
   homepage "https://github.com/davidhampgonsalves/slackline"
   url "https://github.com/davidhampgonsalves/slackline"
   version "1.0"
-  sha256 "b631faa0fd84fc193efbd423cf5465ea2a2a015d625cc9567d8158e449694723"
+  sha256 "f913a082568570238147fd08b5c379cf829aaaf2208739607faf69bdba70aa0"
 
   depends_on "go" => :build
   depends_on "gpm" => :build
