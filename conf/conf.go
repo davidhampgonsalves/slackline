@@ -27,13 +27,13 @@ func Save(c *Conf) error {
 func Init(c *Conf) error {
   conf := *c
 
-  fmt.Println("Enter your Slack Web API token(or enter to skip), you can find it at https://api.slack.com/web#authentication") 
+  fmt.Println("Enter Slack Web API token(enter to skip), found at https://api.slack.com/web#authentication") 
   token, _ := speakeasy.Ask("")
   if token != ""  {
     conf.SlackToken = token
   }
 
-  fmt.Println("Enter the default channel you want to post to.") 
+  fmt.Println("Enter the default channel you want to post to.")
   var channel string
   fmt.Scanf("%s", &channel)
   if channel != "" {

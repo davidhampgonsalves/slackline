@@ -7,17 +7,11 @@ import (
 )
 
 /*
-
-flags
- -c = channel names (slack channel names are single word seperated by comma)
- -t = set token
- --save = persist flags to config
- -i = init, ask for channels and token
-handle piping input?
-
-TODO:
-  if no cred or channels, display link to get token from slack
-  message format
+  flags
+   -c = channel names (slack channel names are single word seperated by comma)
+   -t = set token
+   --save = persist flags to config
+   -i = init, ask for channels and token
 */
 
 func main() {
@@ -45,7 +39,9 @@ func main() {
 		err = slack.PostMessage(config)
 		if err != nil {
 			fmt.Println(err)
+      return
 		}
+    return
 	}
 
   if config.Save {
