@@ -33,7 +33,7 @@ slackline -s <slack-token> -c "#channel" --save message to post
 brew install https://raw.githubusercontent.com/davidhampgonsalves/slackline/master/slackline.rb
 ```
 
-##GO(golang)
+###GO(golang)
 ```sh 
 go get github.com/davidhampgonsalves/slackline
 ```
