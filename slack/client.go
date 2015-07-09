@@ -24,6 +24,9 @@ func JoinChannel(config *conf.Conf) error {
 
 func formatMessage(config *conf.Conf) string {
 	msg := config.Message
+
+  // TODO: might add plugable formatters, decide on if useful
+
 	return url.QueryEscape(msg)
 }
 

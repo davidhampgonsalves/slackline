@@ -4,6 +4,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+  "golang.org/x/crypto/sha3"
 	"errors"
 	"io"
 	"os"
@@ -38,14 +39,12 @@ func Encrypt(str string) string {
 func generateCipherBlock() cipher.Block {
 	host, _ := os.Hostname()
 	cpuCount := string(runtime.NumCPU())
-	keyParts := []string{cpuCount, runtime.GOARCH, runtime.GOOS, host}
-	keyString := strings.Join(keyParts, "-")
+	keyString := strings.Join([]string{cpuCount, runtime.GOARCH, runtime.GOOS, host}, "-")
 
 	key := make([]byte, 32)
-	for i := 0; i < len(key) && i < len(keyString); i++ {
-		key[i] = byte(keyString[i])
-	}
-	block, _ := aes.NewCipher(key)
+  sha3.ShakeSum256(key, []byte(keyString))
+
+  block, _ := aes.NewCipher(key)
 
 	return block
 }
