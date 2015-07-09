@@ -2,7 +2,7 @@
 > Slackline lets you post updates/messages to slack with minimal disruption from the cmd line.
 
 <p style="text-align:center">
-  <img src="https://github.com/davidhampgonsalves/slackline/blob/master/slackline.gif" width=1200px> 
+  <img src="https://github.com/davidhampgonsalves/slackline/blob/master/slackline.gif" width=1200px>
 </p>
 
 ## Usage
@@ -26,14 +26,16 @@ slackline -t <slack-token> -c "#channel" message to post
 slackline -s <slack-token> -c "#channel" --save message to post
 ```
 
-## Setup 
+## Setup
 
-###Homebrew
+### GO(golang)
 ```sh
-brew install https://raw.githubusercontent.com/davidhampgonsalves/slackline/master/slackline.rb
+go get github.com/davidhampgonsalves/slackline
 ```
 
-###GO(golang)
-```sh 
-go get github.com/davidhampgonsalves/slackline
+## Aliases
+### Zsh
+Send message to #status channel in `/me` style.
+```sh
+me () { slackline -c "#status" _"$@"_ }
 ```
